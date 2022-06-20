@@ -14,7 +14,6 @@ function App() {
 
   const [mode, setMode] = useState('light');
   const [alert, setAlert] = useState(null);
-  const [btnType, setbtnType] = useState('primary');
 
   const showAlert = (message, type) => {
       setAlert({
@@ -26,63 +25,30 @@ function App() {
       }, 1500);
   }
 
-  const toggleModeBlue = () => {
+  const toggleMode = () => {
     if(mode === 'light') {
       setMode('dark');
       document.body.style.backgroundColor = '#08033b';
-      showAlert("Blue dark mode has been enabled", "success");
-      setbtnType('primary');
+      showAlert("Dark mode has been enabled", "success");
     }
     else {
       setMode('light');
       document.body.style.backgroundColor = '#ffffff';
       showAlert("Light mode has been enabled", "success");
-      setbtnType('primary');
-      
     }
   };
 
-  const toggleModeRed = () => {
-    if(mode === 'light') {
-      setMode('dark');
-      document.body.style.backgroundColor = '#93010f';
-      showAlert("Red dark mode has been enabled", "success");
-      setbtnType('danger');
-    }
-    else {
-      setMode('light');
-      document.body.style.backgroundColor = '#ffffff';
-      showAlert("Light mode has been enabled", "success");
-      setbtnType('primary');
-    }
-  };
-
-  const toggleModeGreen = () => {
-    if(mode === 'light') {
-      setMode('dark');
-      document.body.style.backgroundColor = '#004525';
-      showAlert("Green dark mode has been enabled", "success");
-      setbtnType('success');
-    }
-    else {
-      setMode('light');
-      document.body.style.backgroundColor = '#ffffff';
-      showAlert("Light mode has been enabled", "success");
-      setbtnType('primary');
-    }
-  };
 
   return (
     <>
-    {/* <Navbar title = "TextUtils" aboutText = "About TextUtils"/> */}
-    {/* <Navbar/> */}
     <HashRouter>
-      <Navbar title = "TextUtils" mode = {mode} toggleModeBlue = {toggleModeBlue} toggleModeRed = {toggleModeRed} toggleModeGreen = {toggleModeGreen}/>
+      <Navbar title = "TextUtils" mode = {mode} toggleMode = {toggleMode} />
       <Alert alert = {alert} showAlert = {showAlert} />
       <div className = "container my-3">
         <Routes>
-          <Route path="/about" element={<About/>}></Route>
-          <Route path="/" element={<TextForm showAlert = {showAlert} heading = "Enter text to analyze" mode = {mode} btnType = {btnType} />}></Route>
+          <Route path="/about" element={<About mode = {mode}/>}></Route>
+          <Route path="/" element={<TextForm showAlert = {showAlert} 
+          heading = " Try TextUtils - Word Counter, Character Counter" mode = {mode} />}></Route>
         </Routes> 
       </div>
     </HashRouter>
